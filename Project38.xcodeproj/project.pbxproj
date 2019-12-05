@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842322B42397D6A60089417F /* Author+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842322B22397D6A60089417F /* Author+CoreDataClass.swift */; };
+		842322B52397D6A60089417F /* Author+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842322B32397D6A60089417F /* Author+CoreDataProperties.swift */; };
 		84C5507E2396FD3800218C2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5507D2396FD3800218C2D /* AppDelegate.swift */; };
 		84C550802396FD3800218C2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5507F2396FD3800218C2D /* ViewController.swift */; };
 		84C550832396FD3800218C2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C550812396FD3800218C2D /* Main.storyboard */; };
@@ -16,11 +18,13 @@
 		84C550932396FE7A00218C2D /* Project38.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84C550912396FE7A00218C2D /* Project38.xcdatamodeld */; };
 		84C550962397000600218C2D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C550952397000600218C2D /* CoreData.framework */; };
 		84C550982397020300218C2D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C550972397020300218C2D /* SwiftyJSON.swift */; };
-		84C5509F2397060E00218C2D /* Commit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5509D2397060E00218C2D /* Commit+CoreDataClass.swift */; };
-		84C550A02397060E00218C2D /* Commit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5509E2397060E00218C2D /* Commit+CoreDataProperties.swift */; };
+		84C550AB23972E6100218C2D /* Commit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C550A723972E6100218C2D /* Commit+CoreDataClass.swift */; };
+		84C550AC23972E6100218C2D /* Commit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C550A823972E6100218C2D /* Commit+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		842322B22397D6A60089417F /* Author+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataClass.swift"; sourceTree = "<group>"; };
+		842322B32397D6A60089417F /* Author+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		84C5507A2396FD3800218C2D /* Project38.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project38.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C5507D2396FD3800218C2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84C5507F2396FD3800218C2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,8 +36,8 @@
 		84C550922396FE7A00218C2D /* Project38.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project38.xcdatamodel; sourceTree = "<group>"; };
 		84C550952397000600218C2D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84C550972397020300218C2D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		84C5509D2397060E00218C2D /* Commit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Commit+CoreDataClass.swift"; sourceTree = "<group>"; };
-		84C5509E2397060E00218C2D /* Commit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Commit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		84C550A723972E6100218C2D /* Commit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Commit+CoreDataClass.swift"; sourceTree = "<group>"; };
+		84C550A823972E6100218C2D /* Commit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Commit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +72,10 @@
 		84C5507C2396FD3800218C2D /* Project38 */ = {
 			isa = PBXGroup;
 			children = (
-				84C5509D2397060E00218C2D /* Commit+CoreDataClass.swift */,
-				84C5509E2397060E00218C2D /* Commit+CoreDataProperties.swift */,
+				842322B22397D6A60089417F /* Author+CoreDataClass.swift */,
+				842322B32397D6A60089417F /* Author+CoreDataProperties.swift */,
+				84C550A723972E6100218C2D /* Commit+CoreDataClass.swift */,
+				84C550A823972E6100218C2D /* Commit+CoreDataProperties.swift */,
 				84C550972397020300218C2D /* SwiftyJSON.swift */,
 				84C5507D2396FD3800218C2D /* AppDelegate.swift */,
 				84C5507F2396FD3800218C2D /* ViewController.swift */,
@@ -162,10 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C5509F2397060E00218C2D /* Commit+CoreDataClass.swift in Sources */,
+				84C550AC23972E6100218C2D /* Commit+CoreDataProperties.swift in Sources */,
+				84C550AB23972E6100218C2D /* Commit+CoreDataClass.swift in Sources */,
+				842322B52397D6A60089417F /* Author+CoreDataProperties.swift in Sources */,
 				84C550932396FE7A00218C2D /* Project38.xcdatamodeld in Sources */,
-				84C550A02397060E00218C2D /* Commit+CoreDataProperties.swift in Sources */,
 				84C550902396FDD800218C2D /* DetailViewController.swift in Sources */,
+				842322B42397D6A60089417F /* Author+CoreDataClass.swift in Sources */,
 				84C550802396FD3800218C2D /* ViewController.swift in Sources */,
 				84C550982397020300218C2D /* SwiftyJSON.swift in Sources */,
 				84C5507E2396FD3800218C2D /* AppDelegate.swift in Sources */,

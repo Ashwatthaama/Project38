@@ -58,13 +58,13 @@
         <!--Detail View Controller-->
         <scene sceneID="UFT-16-O65">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="8pd-VP-4Xd" customClass="DetailViewController" customModule="Project38" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Detail" id="8pd-VP-4Xd" customClass="DetailViewController" customModule="Project38" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qXQ-Pg-egU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjw-Lt-n5I">
-                                <rect key="frame" x="186" y="438" width="42" height="21"/>
+                                <rect key="frame" x="20" y="64" width="374" height="740"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,10 +72,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3Z6-0n-hbj" firstAttribute="trailing" secondItem="tjw-Lt-n5I" secondAttribute="trailing" constant="186" id="DBk-KK-IXP"/>
-                            <constraint firstItem="3Z6-0n-hbj" firstAttribute="bottom" secondItem="tjw-Lt-n5I" secondAttribute="bottom" constant="403" id="IM2-eR-cyU"/>
-                            <constraint firstItem="tjw-Lt-n5I" firstAttribute="top" secondItem="3Z6-0n-hbj" secondAttribute="top" constant="394" id="MxW-c8-EEA"/>
-                            <constraint firstItem="tjw-Lt-n5I" firstAttribute="leading" secondItem="3Z6-0n-hbj" secondAttribute="leading" constant="186" id="fWW-4e-fg0"/>
+                            <constraint firstItem="3Z6-0n-hbj" firstAttribute="trailing" secondItem="tjw-Lt-n5I" secondAttribute="trailing" constant="20" id="DBk-KK-IXP"/>
+                            <constraint firstItem="3Z6-0n-hbj" firstAttribute="bottom" secondItem="tjw-Lt-n5I" secondAttribute="bottom" constant="58" id="IM2-eR-cyU"/>
+                            <constraint firstItem="tjw-Lt-n5I" firstAttribute="top" secondItem="3Z6-0n-hbj" secondAttribute="top" constant="20" id="MxW-c8-EEA"/>
+                            <constraint firstItem="tjw-Lt-n5I" firstAttribute="leading" secondItem="3Z6-0n-hbj" secondAttribute="leading" constant="20" id="fWW-4e-fg0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Z6-0n-hbj"/>
                     </view>
