@@ -11,67 +11,58 @@ import CoreData
 
 class ViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    var container: NSPersistentContainer!
+    
     var commitPredicate: NSPredicate?
+
+    let persistenceManager = PersistenceService.sharedInstance()
 
     var fetchResultController: NSFetchedResultsController<Commit>!
 
-    var commits = [Commit]()
+    let networkManager = NetworkManager.sharedInstance()
+
+  //  var commits = [Commit]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(changeFilter))
-        container = NSPersistentContainer(name: "Project38")
-
-        container.loadPersistentStores { (descriptor, error) in
-            self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            if let error = error {
-                print("Unresolved Error \(error)")
-            }
-
-        }
-
+    
         performSelector(inBackground: #selector(fetchCommits), with: nil)
         loadSavedData()
     }
 
-    func saveContext() {
-        if container.viewContext.hasChanges {
-            do {
-                try container.viewContext.save()
-            } catch {
-                print("An Error occured while saving: \(error)")
-            }
-        }
-    }
+
 
     @objc func fetchCommits() {
 
         let newestCommitDate = getNewestCommitDate()
 
-        if let data = try? String(contentsOf: URL(string: "https://api.github.com/repos/apple/swift/commits?per_page=100&since=\(newestCommitDate)")!)  {
+        let urlPath = URL(string: "https://api.github.com/repos/apple/swift/commits?per_page=100&since=\(newestCommitDate)")
 
-            let jsonCommit = JSON(parseJSON: data)
 
-            let jsonCommitArray = jsonCommit.arrayValue
+        networkManager.requestData(for: urlPath!) { result in
 
-            print("Received \(jsonCommitArray.count) new commits.")
-
-            DispatchQueue.main.async { [unowned self] in
-                for jsonCommit in jsonCommitArray {
-                    let commit = Commit(context: self.container.viewContext)
-                    self.configure(commit:commit, usingJSON:jsonCommit)
+            switch result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                decoder.userInfo[CodingUserInfoKey.context] = self.persistenceManager.context
+                do {
+                   let _ = try decoder.decode([Commit].self, from: data)
+                   self.persistenceManager.saveContext()
                 }
-                self.saveContext()
-                self.loadSavedData()
+                catch {
+                    print("Error")
+                }
+            case .failure(let error):
+                print(error)
             }
+
         }
     }
 
     func configure(commit:Commit, usingJSON json:JSON) {
         commit.sha = json["sha"].stringValue
-        commit.message = json["commit"]["message"].stringValue
+       // commit.message = json["commit"]["message"].stringValue
         commit.url = json["html_url"].stringValue
 
         let formatter = ISO8601DateFormatter()
@@ -83,7 +74,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
         let authorRequest = Author.createFetchRequest()
         authorRequest.predicate = NSPredicate(format: "name == %@", json["commit"]["committer"]["name"].stringValue)
 
-        if let authors = try? container.viewContext.fetch(authorRequest) {
+        if let authors = try? persistenceManager.context.fetch(authorRequest) {
             if authors.count > 0 {
                 // we have this author already
                 commitAuthor = authors[0]
@@ -92,14 +83,14 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
 
         if commitAuthor == nil {
             // we didn't find a saved author - create a new one!
-            let author = Author(context: container.viewContext)
+            let author = Author(context: persistenceManager.context)
             author.name = json["commit"]["committer"]["name"].stringValue
             author.email = json["commit"]["committer"]["email"].stringValue
             commitAuthor = author
         }
 
         // use the author, either saved or new
-        commit.author = commitAuthor
+      //  commit.author = commitAuthor
     }
 
     func getNewestCommitDate() -> String {
@@ -110,7 +101,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
         newestRequest.sortDescriptors = [sort]
         newestRequest.fetchLimit = 1
 
-        if let commits = try? container.viewContext.fetch(newestRequest) {
+        if let commits = try? persistenceManager.context.fetch(newestRequest) {
             if commits.count > 0 {
                 return formatter.string(from: commits[0].date.addingTimeInterval(1))
             }
@@ -136,7 +127,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
 
         let commit = fetchResultController.object(at: indexPath)
         cell.textLabel!.text = commit.message
-       // cell.detailTextLabel!.text = commit.date.description
+      //  cell.detailTextLabel!.text = commit.date.description
         cell.detailTextLabel!.text = "By \(commit.author.name) on \(commit.date.description)"
 
         return cell
@@ -145,10 +136,10 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let commit = fetchResultController.object(at: indexPath)
-            self.container.viewContext.delete(commit)
+            self.persistenceManager.context.delete(commit)
 //            commits.remove(at: indexPath.row)
 //            tableView.deleteRows(at: [indexPath], with: .fade)
-            saveContext()
+             persistenceManager.saveContext()
         }
     }
 
@@ -179,15 +170,15 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
             let request = Commit.createFetchRequest()
             let sort = NSSortDescriptor(key: "author.name", ascending: false)
             request.sortDescriptors = [sort]
-            request.fetchBatchSize = 20
+            request.fetchBatchSize = 50
 
-            fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: container.viewContext, sectionNameKeyPath: "author.name", cacheName: nil)
+            fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistenceManager.context, sectionNameKeyPath: "author.name", cacheName: nil)
             fetchResultController.delegate = self
         }
         fetchResultController.fetchRequest.predicate = commitPredicate
         do {
             try fetchResultController.performFetch()
-            print("Got \(commits.count) commits")
+          //  print("Got \(commits.count) commits")
             tableView.reloadData()
         } catch  {
             print("Fetch Failed")
