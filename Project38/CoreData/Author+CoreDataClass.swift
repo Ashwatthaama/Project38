@@ -11,9 +11,8 @@ import Foundation
 import CoreData
 
 @objc(Author)
-public class Author: NSManagedObject, Codable, ManagedDecodable {
+public class Author: NSManagedObject, Codable {
 
-    static var entityName: String = "Author"
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -23,17 +22,6 @@ public class Author: NSManagedObject, Codable, ManagedDecodable {
         case commit
     }
 
-    func update(from decoder: Decoder) throws {
-        do {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let commitNested = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .commit)
-        let values = try commitNested.nestedContainer(keyedBy: CodingKeys.self, forKey: .author)
-        name = try values.decode(String.self, forKey: .name)
-        email = try values.decode(String.self, forKey: .email)
-        } catch {
-            print("Decoding Author,\(error)")
-        }
-    }
 
     public func encode(to encoder:Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

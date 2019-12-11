@@ -8,16 +8,16 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, Storyboarded {
 
+    var coordinator: DetailsCoordinator?
+    
     @IBOutlet weak var detailLabel: UILabel!
-
-    var detailItem: Commit?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let detail = self.detailItem {
+        if let detail = coordinator?.detailItem {
             detailLabel.text = detail.message
         }
     }

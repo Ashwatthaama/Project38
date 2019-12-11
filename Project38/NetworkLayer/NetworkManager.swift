@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class NetworkManager {
 
     typealias ResponseType = (Result<Data, Error>) -> Void
@@ -35,5 +36,6 @@ class NetworkManager {
          }
         task.resume()
     }
+
 }
 

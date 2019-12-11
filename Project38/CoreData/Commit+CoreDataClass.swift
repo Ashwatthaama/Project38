@@ -86,6 +86,7 @@ public class Commit: NSManagedObject, Codable {
             } else {
                 throw DecodingError.dataCorruptedError(forKey: .date, in: authorsNested, debugDescription: "Date string does not match format expected by formatter.")
             }
+            
 
             author = try commitNested.decode(Author.self, forKey: .author)
 

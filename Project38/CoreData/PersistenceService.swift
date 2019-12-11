@@ -9,6 +9,10 @@
 import Foundation
 import CoreData
 
+protocol PersistenceProtocol {
+    func saveData(_ data:Data)
+}
+
 class PersistenceService {
 
     private init() { }
@@ -33,8 +37,6 @@ class PersistenceService {
         }
         return container
     }()
-
-
     
     func saveContext() {
         if persistenceContainer.viewContext.hasChanges {
